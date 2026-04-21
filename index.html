@@ -182,18 +182,40 @@
       </g>
     </svg>
     <script type="module">
-      import {
-        animate,
-        stagger,
-        set,
-        svg,
-        createDraggable,
-        utils,
-      } from "https://esm.sh/animejs";
+      import { createTimeline, set, stagger } from "https://esm.sh/animejs";
 
       set("svg *", {
         transformOrigin: "center",
         transformBox: "fill-box",
+      });
+
+      const items = ["#mela", "#pera", "#carrot", "#fiore", "#orange"];
+
+      set(items, {
+        translateY: 220,
+        opacity: 0,
+      });
+
+      const timeline = createTimeline({
+        loop: true,
+        loopDelay: 500,
+        defaults: {
+          duration: 850,
+          ease: "out(3)",
+        },
+      });
+
+      timeline.add(items, {
+        translateY: -22,
+        opacity: 1,
+        delay: stagger(140),
+      });
+
+      timeline.add(items, {
+        translateY: 0,
+        duration: 420,
+        ease: "inOut(2)",
+        delay: stagger(140),
       });
     </script>
   </body>
